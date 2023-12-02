@@ -3,68 +3,123 @@
 Console.Clear();
 
 Console.WriteLine("Forme seu time de basquete dos sonhos");
+Console.WriteLine(" ");
 
 Thread.Sleep(2000);
 
 Console.WriteLine("Top 20 MELHORES jogadores do mundo:");
+Console.WriteLine(" ");
 
 Console.WriteLine("+===================================+" );
-Console.WriteLine("|  TOP |      NOME      |  POSIÇÃO  |" );
+Console.WriteLine("| TOP |       NOME      |  POSIÇÃO  |" );
 Console.WriteLine("+===================================+" );
-Console.WriteLine("|  #1  | Michael Jordan |  Armador  | ");
-Console.WriteLine("|  #2  |  LeBron James  |    Ala    |");
-Console.WriteLine("|  #3  |  Kareem Abdul  |    Pivô   |");
-Console.WriteLine("|  #4  |  Magic Johnson |  Armador  |");
-Console.WriteLine("|  #5  |Wilt Chamberlain|    Pivô   |");
-Console.WriteLine("|  #6  |  Bill Russell  |    Pivô   |");
-Console.WriteLine("|  #7  |    Larry Bird  |    Ala    |");
-Console.WriteLine("|  #8  |   Tim Duncan   |  Ala-Pivô |");
-Console.WriteLine("|  #9  | Oscar Robertson|  Armador  |");
-Console.WriteLine("| #10  |   Kobe Bryant  |  Armador  |");
-Console.WriteLine("| #11  |Shaquille O\'Neal|    Pivô   |");
-Console.WriteLine("| #12  |  Kevin Durant  |    Ala    |");
-Console.WriteLine("| #13  | Hakeem Olajuwon|    Pivô   |");
-Console.WriteLine("| #14  |  Julius Erving |    Ala    |");
-Console.WriteLine("| #15  |  Moses Malone  |    Pivô   |");
-Console.WriteLine("| #16  |  Stephen Curry |  Armador  |");
-Console.WriteLine("| #17  |  Dirk Nowitzki |  Ala-Pivô |");
-Console.WriteLine("| #18  |   Giannis A.   |  Ala-Pivô |");
-Console.WriteLine("| #19  |   Jerry West   |  Armador  |");
-Console.WriteLine("| #20  |   Elgin Baylor |    Ala    |");
+
+Dictionary<int, string[]> topJogadores = new Dictionary<int, string[]>
+ {
+            { 1, new string[] { " Michael Jordan ", "Armador" } },
+            { 2, new string[] { "  LeBron James  ", "  Ala  "  } },
+            { 3, new string[] { "  Kareem Abdul  ", "  Pivô "} },
+            { 4, new string[] { "  Magic Johnson ", "Armador"} },
+            { 5, new string[] { "Wilt Chamberlain","  Pivô "} },
+            { 6, new string[] { "  Bill Russell  ", "  Pivô "} },
+            { 7, new string[] { "   Larry Bird   ", "  Ala  "} },
+            { 8, new string[] { "   Tim Duncan  ", "Ala-Pivô"} },
+            { 9, new string[] { " Oscar Robertson", "Armador"} },
+            { 10,new string[] { "  Kobe Bryant  ", "Armador"} },
+            { 11,new string[] { "Shaquille O\'Neal", " Pivô "} },
+            { 12,new string[] { "  Kevin Durant ", "  Ala  "} },
+            { 13,new string[] { "Hakeem Olajuwon", "  Pivô "} },
+            { 14,new string[] { " Julius Erving ", "  Ala  "} },
+            { 15,new string[] { " Moses Malone  ", " Pivô  "} },
+            { 16,new string[] { " Stephen Curry ", "Armador"} },
+            { 17,new string[] { "Dirk Nowitzki ", "Ala-Pivô"} },
+            { 18,new string[] { "  Giannis A.  ", "Ala-Pivô"} },
+            { 19,new string[] { "  Jerry West   ", "Armador"} },
+            { 20,new string[] { " Elgin Baylor  ", "  Ala  "} },
+ };
+foreach (var jogador in topJogadores)
+        {
+            Console.WriteLine($"| #{jogador.Key} | {jogador.Value[0]} |  {jogador.Value[1]}  |");
+        }
 Console.WriteLine("+===================================+");
 Console.WriteLine(" ");
 
-double Armador, Pivo1, Pivo2, AlaD, AlaE;
+string[] time = new string[5];
+ 
+for (int i = 0; i < 5; i++)
+{
+     string classe = "";
+     if (i == 0)
+         classe = "Armador";
+     else if (i == 1 || i == 3) 
+         classe = "Ala";
+     else if (i == 2 || i == 4)
+         classe = "Pivô";
+     
+    Console.WriteLine($"Adicione um jogador escolhendo o número dele");
+    Console.WriteLine($"{i} jogador(es) selecionado(s).");
+    Console.WriteLine(" ");
+ 
+    int escolha;
+    do
+    {
+                Console.Write($"Digite o número do jogador da classe {classe} para a posição {i + 1}: ");
+                escolha = Convert.ToInt32(Console.ReadLine());
+ 
+               
+                if (topJogadores.ContainsKey(escolha))
+                {
+                    
+                    if (!Array.Exists(time, jogador => jogador == null) && i == 2)
+                    {
+                        Console.WriteLine("Você já escolheu os dois pivôs.");
+                    }
+                    else if (time[i] != null)
+                    {
+                        Console.WriteLine("Escolha outra posição, esta posição já está preenchida.");
+                    }
+                    else if (topJogadores[escolha][1] == "Armador" && i != 0)
+                    {
+                        Console.WriteLine("Escolha outra opção, esta posição é para um ARMADOR.");
+                    }
+                    else if (topJogadores[escolha][1] == "Ala" && (i != 1 && i != 3))
+                    {
+                        Console.WriteLine("Escolha outra opção, esta posição é para uma ALA.");
+                    }
+                    else if (topJogadores[escolha][1] == "Pivô" && i != 2)
+                    {
+                        Console.WriteLine("Escolha outra opção, esta posição é para um PIVÔ.");
+                    }
+                    else
+                    {
+                        time[i] = topJogadores[escolha][0];
+                        Console.WriteLine($"{topJogadores[escolha][0]} adicionado à posição {i + 1} do time.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Número inválido. Tente novamente.");
+                }
+            } while (!topJogadores.ContainsKey(escolha) || time[i] == null);
+ 
+            Console.WriteLine(" ");
+        }
+ Console.Clear();
 
-Thread.Sleep(5000);
-
-Console.WriteLine("Adicione um jogador escolhendo o número dele");
-Console.WriteLine("0 jogadores selecionados.");
-Console.WriteLine(" ");
-
-Console.Write("Digite o número de um Armador: ");
-Armador = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("1 jogador(es) foram selecionados.");
-Console.WriteLine(" ");
-
-Console.Write("Digite o número da Ala Direita: ");
-AlaD = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("2 jogador(es) foram selecionados.");
-Console.WriteLine(" ");
-
-Console.Write("Digite o número da Ala Esquerda: ");
-AlaE = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("3 jogador(es) foram selecionados.");
-Console.WriteLine(" ");
-
-Console.Write("Digite o número do Pivô 1: ");
-Pivo1 = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("4 jogador(es) foram selecionados.");
-Console.WriteLine(" ");
-
-Console.Write("Digite o número do Pivô 2: ");
-Pivo2 = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("5 jogador(es) foram selecionados.");
-
-Console.WriteLine("Seu time é:");
-
+Console.WriteLine("Seu time dos sonhos é:");
+Console.WriteLine("+====================================+" );
+Console.WriteLine("| TOP |      NOME        |  POSIÇÃO  |" );
+Console.WriteLine("+====================================+" );
+for (int i = 0; i < 5; i++)
+{
+     string classe = "";
+     if (i == 0)
+         classe = "Armador";
+     else if (i == 1 || i == 3)
+         classe = "Ala";
+     else if (i == 2 || i == 4)
+         classe = "Pivô";
+     
+    Console.WriteLine($"| {i + 1}ª  | {time[i],-16} |  {classe,-9}|");
+}
+Console.WriteLine("+====================================+");
