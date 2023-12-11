@@ -78,15 +78,15 @@ for (int i = 0; i < 5; i++)
                     {
                         Console.WriteLine("Escolha outra posição, esta posição já está preenchida.");
                     }
-                    else if (topJogadores[escolha][1] == "Armador" && i != 0)
+                    else if (topJogadores[escolha][1].Trim() != "Armador" && i == 0)
                     {
                         Console.WriteLine("Escolha outra opção, esta posição é para um ARMADOR.");
                     }
-                    else if (topJogadores[escolha][1] == "Ala" && (i != 1 && i != 3))
+                    else if (!topJogadores[escolha][1].Trim().Contains("Ala") && (i == 1 || i == 3))
                     {
                         Console.WriteLine("Escolha outra opção, esta posição é para uma ALA.");
                     }
-                    else if (topJogadores[escolha][1] == "Pivô" && i != 2)
+                    else if (!topJogadores[escolha][1].Trim().Contains("Pivô") && i == 2)
                     {
                         Console.WriteLine("Escolha outra opção, esta posição é para um PIVÔ.");
                     }
